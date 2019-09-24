@@ -5,8 +5,11 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost'
 import { setContext } from 'apollo-link-context'
 import { Switch, Route } from 'react-router-dom'
-import Feed  from './Feed'
 
+import Feed  from './Feed'
+import Post from './Post'
+import Profile from './Profile'
+import SecuredRoute from './SecuredRoute'
 import Header from './Header'
 
 function App() {
@@ -69,6 +72,8 @@ function App() {
       <Header />      
       <Switch>
         <Route exact path='/' component={Feed} />  
+        <Route path={'/post/:id'} component={Post} />
+        <SecuredRoute path={'/user/:id'} component={Profile} />
       </Switch>  
     </ApolloProvider>
   );
