@@ -5,13 +5,21 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost'
 import { setContext } from 'apollo-link-context'
 import { Switch, Route } from 'react-router-dom'
+import Feed  from './Feed'
 
 import Header from './Header'
 
 function App() {
+  const { isAuthenticated, user } = useAuth0()
+
   const [accessToken, setAccessToken] = useState('')
   
   const { getTokenSilently, loading } = useAuth0()
+
+  
+  if (loading) {
+    return 'Loading...'
+  }
 
   //attempts to fetch a token from Auth0 client
   //if the token is invalid, it is refreshed silently and returned
@@ -20,7 +28,6 @@ function App() {
     try {
       const token = await getTokenSilently()
       setAccessToken(token)
-      console.log(token)
     } catch (error) {
       console.log(error)
     }
@@ -39,7 +46,7 @@ function App() {
       return {
         headers: {
           ...headers,
-          authorization: `bearer ${token}`
+          authorization: `Bearer ${token}`
         }
       }
     } else {
@@ -57,13 +64,12 @@ function App() {
   })
 
 
-  if (loading) {
-    return 'Loading...'
-  }
-
   return (
     <ApolloProvider client={client}>
-      <Header />        
+      <Header />      
+      <Switch>
+        <Route exact path='/' component={Feed} />  
+      </Switch>  
     </ApolloProvider>
   );
 }
