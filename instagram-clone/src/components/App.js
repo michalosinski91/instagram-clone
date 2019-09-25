@@ -11,9 +11,10 @@ import Post from './Post'
 import Profile from './Profile'
 import SecuredRoute from './SecuredRoute'
 import Header from './Header'
+import Upload from './Upload'
 
 function App() {
-  const { isAuthenticated, user } = useAuth0()
+  const { isAuthenticated } = useAuth0()
 
   const [accessToken, setAccessToken] = useState('')
   
@@ -40,7 +41,7 @@ function App() {
 
 
   const httpLink = new HttpLink({
-    uri: 'https://instaclone-graphql.herokuapp.com/v1/graphql'
+    uri: 'https://instagram-clone-mo.herokuapp.com/v1/graphql'
   })
 
   const authLink = setContext((_, { headers }) => {
@@ -69,7 +70,8 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Header />      
+      <Header />  
+      {isAuthenticated && <Upload />}    
       <Switch>
         <Route exact path='/' component={Feed} />  
         <Route path={'/post/:id'} component={Post} />

@@ -1,6 +1,6 @@
 {
     "domain": "dev-zbuwiv9m.eu.auth0.com",
-    "clientId": "h7XXyy155OyCUKlKNO4VxAnPlWqRd4TI",
+    "clientId": "1M8f3HaihFMYNMClLsfyapxx0OB931pr",
     "redirect_uri": "http://localhost:3000",
-    "audience": "https://instaclone-graphql.herokuapp.com/v1/graphql"
+    "audience": "https://instagram-clone-mo.herokuapp.com/v1/graphql"
 }
